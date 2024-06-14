@@ -1,0 +1,1 @@
+fpc -Co -Cr -gl -Miso  ej12.pas
