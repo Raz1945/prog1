@@ -1,70 +1,18 @@
-program pruebaTarea2;
+program workspace;
 
 {$INCLUDE definiciones.pas}
+{$INCLUDE TAREA2.pas}
 
-procedure buscarCadenaEnTextoDesde ( c: Cadena; txt :Texto; desde: Posicion; var pp: PosiblePosicion );
-{ Busca la primera ocurrencia de la cadena `c` en el texto `txt` a partir de la posición `desde`. 
-  Si la encuentra, retorna en `pp` la posición en la que inicia. 
-  **La búsqueda no encuentra cadenas que ocupen más de una línea.** }
 
-{ Precondiciones: 1 <= desde.linea <= cantidad de líneas 
-                  1 <= desde.columna <= tope de línea en desde.linea } 
-var
-  lin                       : Texto;   { lineaActual }
-  ln, cl, limiteLin, indCar : integer; { ln = n de lineas, cl = n de columnas }
-  coincidencia              : boolean;
-begin
-  ln := desde.linea;
-  cl := desde.columna;
 
-  lin := ubicarLineaEnTexto(txt, ln);
 
-  { Verifico si el arreglo 'c' Cadena es mayor a cero 
-    y debera ser  menor o igual al valor del tope de la linea seleccionada } 
-  if (c.tope > 0) and (c.tope <= lin^.info.tope) then
-  begin
-    pp.esPosicion := false; { Se inicializa para no generar errores inesperados, y para capturar a continuacion la primera coincidencia }
-    limiteLin := lin^.info.tope - c.tope + 1; 
-
-    while (lin <> nil) and (cl <= limiteLin) and (not pp.esPosicion) do
-      begin
-        indCar := 1;
-        coincidencia := true;
-
-        { Recorre cada caracter de la cadena `c` y lo compara con la linea de texto actual }
-        while (indCar <= c.tope) and coincidencia do
-        begin
-          // writeln('':4,'Caracter[',indCar:0,'] : ', c.cars[indCar]);
-
-          if (c.cars[indCar] <> lin^.info.cars[cl + indCar - 1].car) then
-          begin
-            // write('[',indCar:0,':] ', c.cars[indCar]);
-            // writeln(' vs [', cl:0,']:', lin^.info.cars[cl].car);
-            coincidencia := false;
-          end
-          else
-            indCar := indCar + 1;
-        end;
-          
-        { Guarda la posicion donde inicia la coincidencia de la busqueda }
-        if coincidencia then
-        begin
-          pp.esPosicion := true;
-          pp.p.linea := ln;
-          pp.p.columna := cl;
-        end;
-
-        cl := cl + 1; { avanza al siguiente caracter de la linea seleccionada }
-    end;
-  end;
-end;
 
 procedure imprimirLinea(txt: Texto; desde: Posicion);
 var
-  lin: Texto;
-  i: integer;
+  lin : Texto;
+  i   : integer;
 begin
-  lin := ubicarLineaEnTexto(txt, desde.linea);
+  lin := ubicarLineaEnTexto(txt, desde.linea); 
   
   if lin <> nil then
   begin
@@ -82,46 +30,86 @@ end;
 
 
 
-
-
-
-{ # "Programa principal" }
-{ --------------------------------------------------- }
+// Programa Principal
 var
-  ln : integer;
-  txt : Texto;
-  lin        : Linea;
-  ini,fin    : integer;
+  tienenFormato: boolean;
+
+
+  txt, taux  : Texto;
   pos        : Posicion;
   c          : Cadena;
-  pc         : PosibleColumna;
-  pp         : PosiblePosicion;
+  tf         : TipoFormato;
   pl         : PosibleLinea;
 
-begin
+Begin
   { inicializo el texto }
   write('Ingrese Nombre de Archivo: ');
   leerTexto(txt);
+
+  write ('Ingrese linea: ');
+  readln (pos.linea);
+
+  // writeln;
+  // write ('Ingrese columna: ');
+  // readln (pos.columna); // La posicion (o columna) donde se agregara la cadena de texto.
+  // writeln;
+
+  // write('Ingrese cadena: ');
+  // leerCadena(c);
+
+  taux := ubicarLineaEnTexto (txt, pos.linea); // Dado un texto ubica la linea seleccionada en él.
+
+  //-----------------//
+    { Supongamo que seleccionamos la linea 3, del texto4: 
+      ` Its a Sith legend. Darth Plagueis was a Dark Lord of the Sith, ` 
+      lin.tope = 62; --> Faltado 18 caracteres para alcanzar el MAXCOL.
+    }
+
+    aplicarFormatoEnLinea(Sub, 1, taux^.info.tope, taux^.info);
+    for tf := Neg to Sub do
+    begin
+      if todosTienenFormatoEnLinea(tf, 1, taux^.info.tope, taux^.info) then
+      begin
+        writeln('tiene formato');
+        mostrarLinea(taux^.info);
+      end
+      else 
+        writeln('No tiene formato');
+    end;
+
+
+    
+    // // Se le agregar un formato como ejemplo. 
+    // for tf := Neg to Sub do
+    // begin
+    //   if todosTienenFormatoEnLinea(tf, 1, taux^.info.tope, taux^.info) then 
+    //     tienenFormato := true
+    //   else
+    //     tienenFormato := false;
+    // end;
+    // { Suponemos que los primeros 18 caracteres tiene formato }
+    // if not tienenFormato then
+    // begin
+    //   aplicarFormatoEnLinea(Sub, 1, 18, taux^.info);
+
+    //   aplicarFormatoEnLinea(Neg, 1, 18, taux^.info);
+    // end;
+  //-----------------//
+
+  // insertarCadenaEnLinea(c, pos.columna, taux^.info, pl); //* En la que estoy trabajando
+  // writeln;
+  // write('Linea sobrante: ');
+  // mostrarPosibleLinea(pl); //todo VER 
+  // if pl.esLinea then
+  // begin
+  //     write('Se insertar la linea sobrante como siguiente...');
+  //     // write('Insertar linea sobrante como siguiente? [0=no,1=si]');
+  //     // readln(opcion);
+  //     // if opcion = 1 then insertarLineaEnTexto(pl.l,pos.linea+1,txt) // Puntero
+  // end;
+
+
   
-  pos.linea := 3;
-  pos.columna := 1;
-
-  { Linea en la que estoy buscando }
-  imprimirLinea(txt, pos);
-
-  { Texto a buscar: }
-  writeln ('Ingrese texto a buscar: ');
-  leerCadena(c);
-
-  buscarCadenaEnTextoDesde(c, txt, pos, pp);
-  
-  writeln ('Resultado: ');
-  mostrarPosiblePosicion (pp);
-  
-  if pp.esPosicion then
-  begin
-      lin := ubicarLineaEnTexto (txt, pp.p.linea)^.info;
-      mostrarLineaCol (lin, pp.p.columna)
-  end
-
-end.
+  // writeln;
+  // mostrarLinea(taux^.info);
+End.

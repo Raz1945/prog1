@@ -186,3 +186,78 @@ begin
     end;
   end;
 end;
+
+// Caso 6
+procedure insertarCadenaEnLinea(c: Cadena; columna: RangoColumna; var ln: Linea; var pln: PosibleLinea);
+{ Inserta la cadena `c` a partir de la `columna` de `ln`, y desplaza hacia la derecha a los restantes caracteres de la línea. 
+  Los caracteres insertados toman el formato del carácter que ocupaba la posición `columna` en la línea. 
+  - Si la columna es `ln.tope + 1`, entonces queda sin formato. 
+  - Si (c.tope + ln.tope) supera `MAXCOL`, los caracteres sobrantes se retornan (en orden) en la posible línea `pln`.
+
+  Precondiciones: 1 <= columna <= ln.tope + 1
+                  columna <= MAXCOL
+                  c.tope + columna <= MAXCOL }
+
+  procedure insertarCadena(c: Cadena; columna: RangoColumna; var ln: Linea; conFormato: boolean);
+  { Inserta la cadena `c` en la `columna` de `ln` considerando si se debe aplicar formato o no }
+  var
+    i: integer;
+  begin
+    for i := 1 to c.tope do
+    begin
+      ln.cars[i + columna - 1].car := c.cars[i];
+      if conFormato then
+        ln.cars[i + columna - 1].fmt := ln.cars[columna].fmt;  // Aplicar el formato del carácter en la posición `columna`
+    end;
+  end;
+
+var
+  i, ini, fin: integer;
+  carEnNuevaLinea: integer; 
+  tf: TipoFormato; // TipoFormato = (Neg, Ita, Sub)
+  tieneFormato: boolean;
+begin
+  ini := 1;       { Columna de inicio. }
+  fin := ln.tope; { Ultima columna ~ Cantidad maxima de caracteres que posee la linea. }
+  tieneFormato := false; 
+
+  { Verificar si los caracteres de la linea tienen algun formato inicialmente. }
+  for tf := Neg to Sub do
+  begin
+    if todosTienenFormatoEnLinea(tf, ini, fin, ln) then 
+      tieneFormato := true;
+  end;
+
+  { Determinar en qué posición se va a insertar. }
+  if (columna >= fin + 1) then
+  begin
+    insertarCadena(c, columna, ln, false);
+  end
+  else 
+  begin
+    if (c.tope + fin > MAXCOL) then
+    begin
+      pln.esLinea := true; // Se 'habilita' una nueva linea. 
+      carEnNuevaLinea := c.tope + fin - MAXCOL; // Caracteres en la nueva linea
+
+      for i := 1 to carEnNuevaLinea do 
+      begin
+        pln.l.cars[i] := ln.cars[MAXCOL - c.tope + i];
+        writeln('Caracter en nueva linea: ', pln.l.cars[i].car);
+      end;
+
+      pln.l.tope := carEnNuevaLinea;
+      fin := MAXCOL - c.tope;
+    end;
+
+    for i := fin downto columna do
+    begin
+      ln.cars[i + c.tope] := ln.cars[i];
+    end;
+
+    insertarCadena(c, columna, ln, tieneFormato);
+  end;
+
+  { Actualizo el tope de la linea }
+  ln.tope := fin + c.tope;
+end;
