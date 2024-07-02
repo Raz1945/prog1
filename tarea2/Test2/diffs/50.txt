@@ -1,0 +1,22 @@
+16c16
+< Columna:15
+---
+> Columna:35
+18c18
+<               ^
+---
+>                                   ^
+34c34
+< Columna:15
+---
+> Columna:35
+36c36
+<               ^
+---
+>                                   ^
+88c88,90
+< No se encuentra
+---
+> Columna:35
+> E[0mn[0m [0me[0ml[0m [0mn[0mu[0mm[0me[0mr[0mo[0m [0m1[0m1[0m1[0m1[0m2[0m [0me[0ms[0mt[0ma[0m [0me[0ml[0m [0mn[0mu[0mm[0me[0mr[0mo[0m [0m1[0m1[0m1[0m2[0m.[0m
+>                                   ^
