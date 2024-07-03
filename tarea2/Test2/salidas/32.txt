@@ -139,7 +139,7 @@ Ingrese Opción
 101=mostrar formatos
 --------------------------------
 Ingrese línea: Ingrese columna: Texto a buscar: Resultado: 
-No se encuentra
+No se encuentra 
 --------------------------------
 Ingrese Opción
 --------------------------------

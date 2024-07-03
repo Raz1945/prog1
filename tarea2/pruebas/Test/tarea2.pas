@@ -79,6 +79,7 @@ var
 Begin
   if (c.tope > 0) and (c.tope <= ln.tope) then
   begin
+    // pc.esColumna := false; { Se inicializa para asegurar el correcto funcionamiento del proceso. }
 
     while (desde <= ln.tope - c.tope + 1) do
     begin

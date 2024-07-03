@@ -1,6 +1,0 @@
-24,25c24,25
-< 10. He became so powerful... the only thing he was afraid of was losing his power, 
-< 11. which ev[0me[0mn[0mt[0mu[0ma[0ml[0ml[0my[0m,[0m [0mo[0mf[0m [0mc[0mo[0mu[0mr[0ms[0me[0m,[0m [0mh[0me[0m [0md[0mi[0md[0m.[0m
----
-> 10. H[0me[0m [0mb[0me[0mc[0ma[0mm[0me[0m [0ms[0mo[0m [0mp[0mo[0mw[0me[0mr[0mf[0mu[0ml[0m.[0m.[0m.[0m [0mt[0mh[0me[0m [0mo[0mn[0ml[0my[0m [0mt[0mh[0mi[0mn[0mg[0m [0mh[0me[0m [0mw[0ma[0ms[0m [0ma[0mf[0mr[0ma[0mi[0md[0m [0mo[0mf[0m [0mw[0ma[0ms[0m [0ml[0mo[0ms[0mi[0mn[0mg[0m [0mh[0mi[0ms[0m [0mp[0mo[0mw[0me[0mr[0m,[0m [0m
-> 11. w[0mh[0mi[0mc[0mh[0m [0me[0mv[0me[0mn[0mt[0mu[0ma[0ml[0ml[0my[0m,[0m [0mo[0mf[0m [0mc[0mo[0mu[0mr[0ms[0me[0m,[0m [0mh[0me[0m [0md[0mi[0md[0m.[0m

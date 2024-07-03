@@ -26,7 +26,6 @@ Begin
 End;
 
 
-
 // Opcion 2
 procedure aplicarFormatoEnLinea ( tfmt: TipoFormato; ini, fin: RangoColumna; var ln: Linea );
   { Aplica el formato `tfmt` a los caracteres de `ln` entre las columnas `ini` y `fin`, incluídos los extremos. 
@@ -48,7 +47,6 @@ Begin
 End;
 
 
-
 // Opcion 3
 function contarCaracteresEnTexto ( txt: Texto ) : integer;
   { Retorna la cantidad de caracteres que tiene el texto `txt` }
@@ -67,22 +65,23 @@ Begin
 End;
 
 
-
 // Opcion 4
-procedure buscarCadenaEnLineaDesde ( c: Cadena; ln: Linea; desde: RangoColumna; var pc: PosibleColumna );
+procedure buscarCadenaEnLineaDesde (c: Cadena; ln: Linea; desde: RangoColumna; var pc: PosibleColumna);
   { Busca la primera ocurrencia de la cadena `c` en la línea `ln` a partir de la columna `desde`.
-    Si la encuentra, retorna en `pc` (pc -> boolean) la columna en la que incia.  
+    Si la encuentra, retorna en `pc` (pc -> boolean) la columna en la que inicia.  
+
     Precondiciones: 1 <= desde <= ln.tope }
 var
   i          : integer; 
   seEncontro : boolean;
 Begin
+  pc.esColumna := false; 
+
   if (c.tope > 0) and (c.tope <= ln.tope) then
   begin
-
-    while (desde <= ln.tope - c.tope + 1) do
+    while (desde <= ln.tope - c.tope + 1) and not pc.esColumna do
     begin
-      i := 1; { Posicion del caracter Cadena }
+      i := 1; { Posicion del caracter 'c' }
       seEncontro := true;
 
       while (i <= c.tope) and seEncontro do
@@ -93,18 +92,17 @@ Begin
           i := i + 1;
       end;
 
-      { Guarda la posicion donde inicia la coincidencia de la busqueda }
+      { Guarda la posicion donde inicia la coincidencia de la busqueda, en caso contrario continua buscando. }
       if seEncontro then
       begin
         pc.esColumna := true;
         pc.col := desde;
-      end;
-
-      desde := desde + 1;
+      end
+      else 
+        desde := desde + 1;
     end;
   end;
 End;
-
 
 
 // Opcion 5
@@ -112,6 +110,7 @@ procedure buscarCadenaEnTextoDesde ( c: Cadena; txt :Texto; desde: Posicion; var
   { Busca la primera ocurrencia de la cadena `c` en el texto `txt` a partir de la posición `desde`. 
     Si la encuentra, retorna en `pp` la posición en la que inicia. 
     La búsqueda no encuentra cadenas que ocupen más de una línea.
+
     Precondiciones: 1 <= desde.linea   <= cantidad de líneas 
                     1 <= desde.columna <= tope de línea en desde.linea } 
 var
@@ -125,7 +124,6 @@ Begin
                                           Si el texto no tiene una línea en la posición `nln`, devuelve `NIL` }
   pp.esPosicion := false; { Se inicializa de manera de no generar errores inesperados, 
                             y para capturar a continuacion la primera coincidencia }
-
   while (taux <> nil) and (not pp.esPosicion) do
   begin
     if (c.tope > 0) and (c.tope <= taux^.info.tope) then
@@ -134,7 +132,7 @@ Begin
 
       while (col <= limite) and (not pp.esPosicion) do
       begin
-        i := 1; { Posicion del caracter Cadena }
+        i := 1; { Posicion del caracter 'c' }
         seEncontro := true;
 
         while (i <= c.tope) and seEncontro do
@@ -170,45 +168,45 @@ Begin
 End;
 
 
-
 // Opcion 6
 procedure insertarCadenaEnLinea(c: Cadena; columna: RangoColumna; var ln: Linea; var pln: PosibleLinea);
   { Inserta la cadena `c` a partir de la `columna` de `ln`, y desplaza hacia la derecha a los restantes caracteres de la línea. 
     Los caracteres insertados toman el formato del carácter que ocupaba la posición `columna` en la línea. 
     - Si la columna es `ln.tope + 1`, entonces queda sin formato. 
     - Si (c.tope + ln.tope) supera `MAXCOL`, los caracteres sobrantes se retornan (en orden) en la posible línea `pln`.
+
     Precondiciones: 1 <= columna <= ln.tope + 1
                     columna <= MAXCOL
                     c.tope + columna <= MAXCOL }
 
-    procedure insertarCadena(c: Cadena; columna: RangoColumna; var ln: Linea; formatCheck: boolean);
-      { Inserta la cadena `c` en la `columna` de `ln` considerando si se debe aplicar formato o no }
-      var
-        i     : integer;
-        tf    : TipoFormato;
-        tfAux : array [TipoFormato] of boolean;
-      Begin
-        if (ln.tope <> 0) then { Caso particular de cuando la linea esta vacia. }
+  procedure insertarCadena(c: Cadena; columna: RangoColumna; var ln: Linea; formatCheck: boolean);
+    { Inserta la cadena `c` en la `columna` de `ln` considerando si se debe aplicar formato o no }
+    var
+      i     : integer;
+      tf    : TipoFormato;
+      tfAux : array [TipoFormato] of boolean;
+    Begin
+      if (ln.tope <> 0) then { Caso particular de cuando la linea esta vacia. }
+      begin
+        for tf:= Neg to Sub do
         begin
-          for tf:= Neg to Sub do
-          begin
-            tfAux[tf] := (formatCheck and ln.cars[columna].fmt[tf]);
-          end;
-        end
-        else
-        begin
-          for tf:= Neg to Sub do
-          begin
-            tfAux[tf] := false;
-          end;        
+          tfAux[tf] := (formatCheck and ln.cars[columna].fmt[tf]);
         end;
+      end
+      else
+      begin
+        for tf:= Neg to Sub do
+        begin
+          tfAux[tf] := false;
+        end;        
+      end;
 
-        for i := 1 to c.tope do
-        begin
-          ln.cars[i + columna - 1].car := c.cars[i];
-          ln.cars[i + columna - 1].fmt := tfAux;
-        end;
-    End;
+      for i := 1 to c.tope do
+      begin
+        ln.cars[i + columna - 1].car := c.cars[i];
+        ln.cars[i + columna - 1].fmt := tfAux;
+      end;
+  End;
 
 var
   i, carEnNuevaLinea  : integer;
@@ -244,7 +242,6 @@ Begin
   insertarCadena(c, columna, ln, formatCheck); 
   ln.tope := ln.tope + c.tope;
 End;
-
 
 
 // Opcion 7

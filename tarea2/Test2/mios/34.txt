@@ -587,9 +587,7 @@ Ingrese Opción
 101=mostrar formatos
 --------------------------------
 Ingrese línea: Ingrese columna: Texto a buscar: Resultado: 
-Columna:18
-P[0mr[0mo[0mg[0mr[0ma[0mm[0ma[0mc[0mi[0mo[0mn[0m [0m1[0m [0m-[0m [0mc[0mu[0mr[0ms[0mo[0m [0m2[0m0[0m2[0m4[0m [0m-[0m [0mp[0mr[0mi[0mm[0me[0mr[0m [0ms[0me[0mm[0me[0ms[0mt[0mr[0me[0m[1m[3m[4m [0m[1m[3m[4m-[0m[1m[3m[4m [0m[1m[3m[4mf[0m[1m[3m[4mi[0m[1m[3m[4mn[0m[1m[3m[4mg[0m[1m[3m[4m [0m[1m[3m[4m-[0m[1m[3m[4m [0m[1m[3m[4mu[0m[1m[3m[4md[0m[1m[3m[4me[0m[1m[3m[4ml[0m[1m[3m[4ma[0m[1m[3m[4mr[0m
-                 ^
+No se encuentra
 --------------------------------
 Ingrese Opción
 --------------------------------
@@ -623,9 +621,7 @@ Ingrese Opción
 101=mostrar formatos
 --------------------------------
 Ingrese línea: Ingrese columna: Texto a buscar: Resultado: 
-Columna:25
-L[0ma[0ms[0m [0mc[0ml[0ma[0ms[0me[0ms[0m [0mt[0me[0mn[0md[0mr[0ma[0mn[0m [0mc[0mo[0mm[0mo[0m [0mp[0mr[0mi[0mn[0mc[0mi[0mp[0ma[0ml[0m [0mo[0mb[0mj[0me[0mt[0mi[0mv[0mo[0m [0mr[0me[0mp[0ma[0ms[0ma[0mr[0m [0mc[0mo[0mn[0mc[0me[0mp[0mt[0mo[0ms[0m [0mt[0me[0mo[0mr[0mi[0mc[0mo[0ms[0m
-                        ^
+No se encuentra
 --------------------------------
 Ingrese Opción
 --------------------------------
