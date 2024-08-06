@@ -38,5 +38,16 @@ Ironic.
 11, 12, 13, 14, 20, 31, 32, 33, 34, 40, 50 y 60.
 b   b   b   b   b   b   m   b   m   b   m   b
 
-Tengo error en el caso 32, 34 (desfazaje) y 50
+Tengo falso negativo en el caso 32
+y no esta insertando cadenas op6
+
+
+
+
+<!--  -->
+mios
+Programacion 1 - curso 2024 - primer semestre[1m[3m[4m [1m[3m[4m-[1m[3m[4m [1m[3m[4mu[1m[3m[4md[1m[3m[4me[1m[3m[4ml[1m[3m[4ma[1m[3m[4mr
+
+salidas:
+[1m[3m[4mP[0m[1m[3m[4mr[0m[1m[3m[4mo[0m[1m[3m[4mg[0m[1m[3m[4mr[0m[1m[3m[4ma[0m[1m[3m[4mm[0m[1m[3m[4ma[0m[1m[3m[4mc[0m[1m[3m[4mi[0m[1m[3m[4mo[0m[1m[3m[4mn[0m[1m[3m[4m [0m[1m[3m[4m1[0m[1m[3m[4m [0m[1m[3m[4m-[0m[1m[3m[4m [0m[1m[3m[4mc[0m[1m[3m[4mu[0m[1m[3m[4mr[0m[1m[3m[4ms[0m[1m[3m[4mo[0m[1m[3m[4m [0m[1m[3m[4m2[0m[1m[3m[4m0[0m[1m[3m[4m2[0m[1m[3m[4m4[0m[1m[3m[4m [0m[1m[3m[4m-[0m[1m[3m[4m [0m[1m[3m[4mp[0m[1m[3m[4mr[0m[1m[3m[4mi[0m[1m[3m[4mm[0m[1m[3m[4me[0m[1m[3m[4mr[0m[1m[3m[4m [0m[1m[3m[4ms[0m[1m[3m[4me[0m[1m[3m[4mm[0m[1m[3m[4me[0m[1m[3m[4ms[0m[1m[3m[4mt[0m[1m[3m[4mr[0m[1m[3m[4me[0m[1m[3m[4m [0m[1m[3m[4m-[0m[1m[3m[4m [0m[1m[3m[4mu[0m[1m[3m[4md[0m[1m[3m[4me[0m[1m[3m[4ml[0m[1m[3m[4ma[0m[1m[3m[4mr[0m
 

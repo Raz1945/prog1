@@ -221,6 +221,7 @@ Begin
   end;
 
   { Caso 2, Si (c.tope + ln.tope) supera `MAXCOL`, los caracteres sobrantes se retornan (en orden) en la posible línea `pln`. }
+  pln.esLinea := false;  { Se inicializa de manera de no generar errores inesperados }
   if (c.tope + ln.tope > MAXCOL) then
   begin
     pln.esLinea := true; { Se 'habilita' una nueva linea. } 
@@ -239,7 +240,7 @@ Begin
     ln.cars[i + c.tope] := ln.cars[i];
   end;
 
-  insertarCadena(c, columna, ln, formatCheck); 
+  insertarCadena(c, columna, ln, formatCheck);
   ln.tope := ln.tope + c.tope;
 End;
 

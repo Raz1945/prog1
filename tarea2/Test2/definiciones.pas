@@ -86,12 +86,14 @@ function ubicarLineaEnTexto ( txt: Texto; nln: integer ) : Texto;
 { Devuelve un puntero al texto en la línea numero `nln`, comenzando en 1.
   Si el texto tiene menos líneas que `nln`, devuelve NIL }
 begin
-   if nln <= 0 then ubicarLineaEnTexto := NIL
+   if nln <= 0 then 
+      ubicarLineaEnTexto := NIL
    else
    begin
       while (txt <> NIL) and (nln <> 1) do
       begin
-	 txt := txt^.sig; nln := nln - 1
+         txt := txt^.sig; 
+         nln := nln - 1
       end;
       ubicarLineaEnTexto := txt
    end
